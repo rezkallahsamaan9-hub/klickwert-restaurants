@@ -396,13 +396,56 @@
 
   <!-- n8n Chat Widget -->
   <link href="https://cdn.jsdelivr.net/npm/@n8n/chat@latest/style.css" rel="stylesheet" />
+  <style>
+    /* Chat Widget Custom Styling */
+    :root {
+      --chat--color-primary: #C9884C;
+      --chat--color-primary-shade-50: #b3773f;
+      --chat--color-primary-shade-100: #9d6835;
+      --chat--color-secondary: #111111;
+      --chat--color-secondary-shade-50: #1a1a1a;
+      --chat--color-white: #f5f0eb;
+      --chat--color-light: #0a0a0a;
+      --chat--color-light-shade-50: #111111;
+      --chat--color-medium: #333333;
+      --chat--color-dark: #f5f0eb;
+      --chat--color-disabled: #555555;
+      --chat--color-typing: #aaaaaa;
+      --chat--header--background: #0a0a0a;
+      --chat--header--color: #f5f0eb;
+      --chat--message--bot--background: #1a1a1a;
+      --chat--message--bot--color: #f5f0eb;
+      --chat--message--user--background: #C9884C;
+      --chat--message--user--color: #0a0a0a;
+      --chat--message--bot--border: 1px solid #222;
+      --chat--input--background: #111111;
+      --chat--input--border: 1px solid #333;
+      --chat--input--color: #f5f0eb;
+      --chat--body--background: #0a0a0a;
+      --chat--window--width: 340px;
+      --chat--window--height: 500px;
+      --chat--border-radius: 12px;
+      --chat--font-family: 'DM Sans', sans-serif;
+      --chat--toggle--background: #C9884C;
+      --chat--toggle--hover--background: #b3773f;
+      --chat--toggle--active--background: #9d6835;
+      --chat--toggle--color: #0a0a0a;
+      --chat--toggle--size: 48px;
+    }
+    .chat-window-wrapper { box-shadow: 0 8px 32px rgba(0,0,0,0.5) !important; }
+    .chat-header { padding: 12px 16px !important; }
+    .chat-header h1 { font-size: 1.1rem !important; margin: 0 !important; font-family: 'DM Sans', sans-serif !important; }
+    .chat-header p { font-size: 0.75rem !important; margin: 2px 0 0 !important; opacity: 0.7; }
+    .chat-message-markdown p { font-size: 0.85rem !important; line-height: 1.5 !important; }
+    .chat-input textarea { font-size: 0.85rem !important; }
+  </style>
   <script type="module">
     import { createChat } from 'https://cdn.jsdelivr.net/npm/@n8n/chat@latest/chat.bundle.es.js';
     createChat({
       webhookUrl: 'https://REMOVED_OLD_N8N_INSTANCE/webhook/REMOVED_WEBHOOK_ID/chat',
       mode: 'window',
       showWelcomeScreen: false,
-      initialMessages: ['Hallo! 👋 Wie kann ich dir helfen? Frag mich alles rund um unsere Services für Restaurants.'],
+      initialMessages: ['Hallo! Wie kann ich dir helfen? Frag mich alles rund um unsere Services.'],
       i18n: {
         en: {
           title: 'KlickWert',
@@ -411,14 +454,6 @@
           getStarted: 'Neue Unterhaltung',
           closeButtonTooltip: 'Chat schließen',
         },
-      },
-      theme: {
-        primaryColor: '#C9884C',
-        secondaryColor: '#0a0a0a',
-        backgroundColor: '#111111',
-        textColor: '#f5f0eb',
-        borderRadius: '12px',
-        fontFamily: "'DM Sans', sans-serif",
       },
     });
   </script>
