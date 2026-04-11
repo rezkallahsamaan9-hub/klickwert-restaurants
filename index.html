@@ -394,6 +394,35 @@
     </div>
   </div>
 
+  <!-- n8n Chat Widget -->
+  <link href="https://cdn.jsdelivr.net/npm/@n8n/chat@latest/style.css" rel="stylesheet" />
+  <script type="module">
+    import { createChat } from 'https://cdn.jsdelivr.net/npm/@n8n/chat@latest/chat.bundle.es.js';
+    createChat({
+      webhookUrl: 'https://REMOVED_OLD_N8N_INSTANCE/webhook/REMOVED_WEBHOOK_ID/chat',
+      mode: 'window',
+      showWelcomeScreen: false,
+      initialMessages: ['Hallo! 👋 Wie kann ich dir helfen? Frag mich alles rund um unsere Services für Restaurants.'],
+      i18n: {
+        en: {
+          title: 'KlickWert',
+          subtitle: 'Dein digitaler Assistent',
+          inputPlaceholder: 'Schreib deine Frage...',
+          getStarted: 'Neue Unterhaltung',
+          closeButtonTooltip: 'Chat schließen',
+        },
+      },
+      theme: {
+        primaryColor: '#C9884C',
+        secondaryColor: '#0a0a0a',
+        backgroundColor: '#111111',
+        textColor: '#f5f0eb',
+        borderRadius: '12px',
+        fontFamily: "'DM Sans', sans-serif",
+      },
+    });
+  </script>
+
   <script src="animations.js"></script>
   <script src="contact.js?v=3"></script>
   <script src="cookie-consent.js"></script>
