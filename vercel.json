@@ -1,6 +1,11 @@
 {
-  "buildCommand": "",
+  "buildCommand": "npm install",
   "outputDirectory": ".",
   "framework": null,
-  "cleanUrls": true
+  "cleanUrls": true,
+  "functions": {
+    "api/*.js": {
+      "maxDuration": 30
+    }
+  }
 }
