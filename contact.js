@@ -91,11 +91,8 @@ document.addEventListener('DOMContentLoaded', () => {
       };
 
       try {
-        const response = await fetch('https://REMOVED_OLD_N8N_INSTANCE/webhook/klickwert-restaurants', {
+        const response = await fetch('https://script.google.com/macros/s/AKfycbwjAMY1uThgIr8_jat_sX_XH3Mz6yby9J8HgoO-l8hDljqIfrO_T3Lk3sbo6Qg2u1qgPQ/exec', {
           method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
           body: JSON.stringify(payload)
         });
 
