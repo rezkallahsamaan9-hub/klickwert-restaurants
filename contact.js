@@ -97,10 +97,14 @@ document.addEventListener('DOMContentLoaded', () => {
           body: JSON.stringify(payload)
         });
 
-        formMessage.textContent = 'Danke! Wir melden uns innerhalb von 24 Stunden.';
+        form.style.display = 'none';
+        document.querySelector('.modal-subtitle').style.display = 'none';
+        formMessage.textContent = '✓ Danke! Wir melden uns innerhalb von 24 Stunden.';
         formMessage.classList.add('success');
         formMessage.style.display = 'block';
-        form.reset();
+        formMessage.style.fontSize = '1.1rem';
+        formMessage.style.padding = '24px';
+        formMessage.style.marginTop = '2rem';
       } catch (error) {
         formMessage.textContent = 'Etwas ist schiefgelaufen. Bitte versuche es erneut.';
         formMessage.classList.add('error');
