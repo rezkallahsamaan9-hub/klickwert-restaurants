@@ -91,11 +91,12 @@ document.addEventListener('DOMContentLoaded', () => {
       };
 
       try {
-        await fetch('https://script.google.com/macros/s/AKfycbwjAMY1uThgIr8_jat_sX_XH3Mz6yby9J8HgoO-l8hDljqIfrO_T3Lk3sbo6Qg2u1qgPQ/exec', {
+        const response = await fetch('/api/contact', {
           method: 'POST',
-          mode: 'no-cors',
+          headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(payload)
         });
+        if (!response.ok) throw new Error('Server error');
 
         form.style.display = 'none';
         document.querySelector('.modal-subtitle').style.display = 'none';
