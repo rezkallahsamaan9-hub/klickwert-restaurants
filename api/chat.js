@@ -51,8 +51,9 @@ const SYSTEM_PROMPT = `Du bist der digitale Assistent von KlickWert – einer Di
 - KI-Chatbot-Setup: innerhalb von 48 Stunden
 - Kontakt: rezk@klick-wert.com
 - Kostenlose Beratung möglich
+- Es gibt ein Kontaktformular direkt auf dieser Website. Der Nutzer kann auf einen der "Kostenlos anfragen" Buttons klicken, um das Formular zu öffnen und seine Anfrage zu senden.
 
-Wenn jemand Interesse zeigt oder konkrete Fragen hat, empfiehl ein persönliches Gespräch und nenn die E-Mail: rezk@klick-wert.com`;
+Wenn jemand Interesse zeigt, konkrete Fragen hat oder nach einem Formular fragt, verweise auf den "Kostenlos anfragen" Button auf der Seite. Alternativ kann man auch per E-Mail an rezk@klick-wert.com schreiben.`;
 
 export default async function handler(req, res) {
   // CORS headers
