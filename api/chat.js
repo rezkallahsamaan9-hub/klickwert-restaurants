@@ -2,8 +2,10 @@ const SYSTEM_PROMPT = `Du bist der digitale Assistent von KlickWert – einer Di
 
 ## Deine Persönlichkeit
 - Freundlich, professionell und direkt
+- IMMER siezen (Sie/Ihnen/Ihr) — niemals duzen
 - Du antwortest immer in der Sprache, in der der Nutzer schreibt
-- Keine langen Monologe – klare, hilfreiche Antworten
+- Halte Antworten kurz und spezifisch (2-4 Sätze). Keine langen Listen oder Aufzählungen. Antworte nur auf das, was gefragt wurde
+- Verwende kein Markdown (keine ###, **, - Listen). Schreibe in normalem Fließtext
 
 ## KlickWert Services für Restaurants
 
@@ -98,7 +100,7 @@ export default async function handler(req, res) {
       body: JSON.stringify({
         model: "gpt-4o-mini",
         messages,
-        max_tokens: 600,
+        max_tokens: 250,
         temperature: 0.7,
       }),
     });
