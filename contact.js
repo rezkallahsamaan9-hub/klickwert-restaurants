@@ -91,19 +91,16 @@ document.addEventListener('DOMContentLoaded', () => {
       };
 
       try {
-        const response = await fetch('https://script.google.com/macros/s/AKfycbwjAMY1uThgIr8_jat_sX_XH3Mz6yby9J8HgoO-l8hDljqIfrO_T3Lk3sbo6Qg2u1qgPQ/exec', {
+        await fetch('https://script.google.com/macros/s/AKfycbwjAMY1uThgIr8_jat_sX_XH3Mz6yby9J8HgoO-l8hDljqIfrO_T3Lk3sbo6Qg2u1qgPQ/exec', {
           method: 'POST',
+          mode: 'no-cors',
           body: JSON.stringify(payload)
         });
 
-        if (response.ok) {
-          formMessage.textContent = 'Danke! Wir melden uns innerhalb von 24 Stunden.';
-          formMessage.classList.add('success');
-          formMessage.style.display = 'block';
-          form.reset();
-        } else {
-          throw new Error('Server error');
-        }
+        formMessage.textContent = 'Danke! Wir melden uns innerhalb von 24 Stunden.';
+        formMessage.classList.add('success');
+        formMessage.style.display = 'block';
+        form.reset();
       } catch (error) {
         formMessage.textContent = 'Etwas ist schiefgelaufen. Bitte versuche es erneut.';
         formMessage.classList.add('error');
