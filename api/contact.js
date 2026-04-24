@@ -59,7 +59,7 @@ async function sendConfirmationEmail(data) {
       'Authorization': 'Bearer ' + apiKey,
     },
     body: JSON.stringify({
-      from: 'KlickWert <onboarding@resend.dev>',
+      from: 'KlickWert <noreply@klick-wert.com>',
       to: data.Email,
       subject: 'Ihre Anfrage bei KlickWert – Bestätigung',
       html: '<p>Hallo ' + (data.Name || '') + ',</p>' +
