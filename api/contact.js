@@ -5,7 +5,9 @@ const TELEGRAM_TOKEN = 'REDACTED_TELEGRAM_TOKEN';
 const TELEGRAM_CHAT_ID = 'REDACTED_CHAT_ID';
 
 async function appendToSheet(data) {
-  const creds = JSON.parse(process.env.GOOGLE_SERVICE_ACCOUNT);
+  const raw = process.env.GOOGLE_SERVICE_ACCOUNT;
+  if (!raw) throw new Error('GOOGLE_SERVICE_ACCOUNT env var missing');
+  const creds = JSON.parse(raw);
   const auth = new google.auth.GoogleAuth({
     credentials: creds,
     scopes: ['https://www.googleapis.com/auth/spreadsheets'],
@@ -17,37 +19,34 @@ async function appendToSheet(data) {
     valueInputOption: 'USER_ENTERED',
     requestBody: {
       values: [[
-        data.Datum,
-        data.Name,
-        data.Email,
-        data.Telefon,
-        data.Website,
-        data.Dienstleistungen,
-        data.Nachricht,
+        data.Datum || '',
+        data.Name || '',
+        data.Email || '',
+        data.Telefon || '',
+        data.Website || '',
+        data.Dienstleistungen || '',
+        data.Nachricht || '',
       ]],
     },
   });
 }
 
 async function sendTelegram(data) {
-  const text = `🔔 Neue Anfrage!\n\nName: ${data.Name || '–'}\nE-Mail: ${data.Email || '–'}\nTelefon: ${data.Telefon || '–'}\nWebsite: ${data.Website || '–'}\nServices: ${data.Dienstleistungen || '–'}\nNachricht: ${data.Nachricht || '–'}`;
-  await fetch(`https://api.telegram.org/bot${TELEGRAM_TOKEN}/sendMessage`, {
+  const text = [
+    '🔔 Neue Anfrage!',
+    '',
+    'Name: ' + (data.Name || '–'),
+    'E-Mail: ' + (data.Email || '–'),
+    'Telefon: ' + (data.Telefon || '–'),
+    'Website: ' + (data.Website || '–'),
+    'Services: ' + (data.Dienstleistungen || '–'),
+    'Nachricht: ' + (data.Nachricht || '–'),
+  ].join('\n');
+  await fetch('https://api.telegram.org/bot' + TELEGRAM_TOKEN + '/sendMessage', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ chat_id: TELEGRAM_CHAT_ID, text }),
   });
-}
-
-async function sendConfirmationEmail(data) {
-  const creds = JSON.parse(process.env.GOOGLE_SERVICE_ACCOUNT);
-  const auth = new google.auth.GoogleAuth({
-    credentials: creds,
-    scopes: ['https://www.googleapis.com/auth/gmail.send'],
-    clientOptions: { subject: 'rezk@klick-wert.com' },
-  });
-  // Gmail API requires domain-wide delegation which is complex to set up.
-  // For now, we skip email and rely on Telegram notification.
-  // Email can be added later with Resend, Mailgun, or SMTP.
 }
 
 export default async function handler(req, res) {
@@ -63,14 +62,25 @@ export default async function handler(req, res) {
     return res.status(400).json({ error: 'Name and Email required' });
   }
 
+  const errors = [];
+
   try {
-    await Promise.all([
-      appendToSheet(data),
-      sendTelegram(data),
-    ]);
-    return res.status(200).json({ status: 'ok' });
+    await sendTelegram(data);
   } catch (err) {
-    console.error('Contact handler error:', err);
-    return res.status(500).json({ error: 'Internal server error' });
+    console.error('Telegram error:', err);
+    errors.push('telegram');
   }
+
+  try {
+    await appendToSheet(data);
+  } catch (err) {
+    console.error('Sheet error:', err.message, err.response?.data || '');
+    errors.push('sheet: ' + err.message);
+  }
+
+  if (errors.length === 2) {
+    return res.status(500).json({ error: 'Both services failed', details: errors });
+  }
+
+  return res.status(200).json({ status: 'ok', warnings: errors.length ? errors : undefined });
 }
