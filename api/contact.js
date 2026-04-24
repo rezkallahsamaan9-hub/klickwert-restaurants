@@ -49,6 +49,33 @@ async function sendTelegram(data) {
   });
 }
 
+async function sendConfirmationEmail(data) {
+  const apiKey = process.env.RESEND_API_KEY;
+  if (!apiKey) throw new Error('RESEND_API_KEY missing');
+  const res = await fetch('https://api.resend.com/emails', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + apiKey,
+    },
+    body: JSON.stringify({
+      from: 'KlickWert <onboarding@resend.dev>',
+      to: data.Email,
+      subject: 'Ihre Anfrage bei KlickWert – Bestätigung',
+      html: '<p>Hallo ' + (data.Name || '') + ',</p>' +
+        '<p>vielen Dank für Ihre Anfrage! Wir haben folgende Angaben erhalten:</p>' +
+        '<p><strong>Interesse an:</strong> ' + (data.Dienstleistungen || '–') + '</p>' +
+        '<p>Wir melden uns innerhalb von 24 Stunden bei Ihnen.</p>' +
+        '<p>Bei dringenden Fragen erreichen Sie uns unter rezk@klick-wert.com.</p>' +
+        '<p>Mit freundlichen Grüßen<br>Ihr KlickWert-Team</p>',
+    }),
+  });
+  if (!res.ok) {
+    const err = await res.text();
+    throw new Error('Resend error: ' + err);
+  }
+}
+
 export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
@@ -78,7 +105,14 @@ export default async function handler(req, res) {
     errors.push('sheet: ' + err.message);
   }
 
-  if (errors.length === 2) {
+  try {
+    await sendConfirmationEmail(data);
+  } catch (err) {
+    console.error('Email error:', err.message);
+    errors.push('email: ' + err.message);
+  }
+
+  if (errors.length === 3) {
     return res.status(500).json({ error: 'Both services failed', details: errors });
   }
 
