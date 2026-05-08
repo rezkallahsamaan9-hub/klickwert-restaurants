@@ -1,8 +1,8 @@
 import { google } from 'googleapis';
 
-const SHEET_ID = 'REDACTED_SHEET_ID';
-const TELEGRAM_TOKEN = 'REDACTED_TELEGRAM_TOKEN';
-const TELEGRAM_CHAT_ID = 'REDACTED_CHAT_ID';
+const SHEET_ID = process.env.SHEET_ID;
+const TELEGRAM_TOKEN = process.env.TELEGRAM_TOKEN;
+const TELEGRAM_CHAT_ID = process.env.TELEGRAM_CHAT_ID;
 
 async function appendToSheet(data) {
   const raw = process.env.GOOGLE_SERVICE_ACCOUNT;
