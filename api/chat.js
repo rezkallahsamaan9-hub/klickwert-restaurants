@@ -10,19 +10,16 @@ const SYSTEM_PROMPT = `Du bist der digitale Assistent von KlickWert – einer Di
 ## KlickWert Services für Restaurants
 
 ### Website-Pakete (monatlich kündbar)
-**Professional – 399 €/Monat**
-- Professionelle Restaurant-Website
-- Online-Speisekarte
-- Tischreservierungs-Integration
-- Mobile-optimiert
-- Basis-SEO
+**Starter – 99 €/Monat**
+- Professionelle Website
+- KI-Chatbot
+- SEO Grundoptimierung
 
-**Premium – 599 €/Monat**
-- Alles aus Professional
-- KI-gestützter Chat-Assistent auf der Website
-- Google Reviews Management
-- Social Media Management (2 Posts/Woche)
-- Priority Support
+**Professional – 249 €/Monat**
+- Professionelle Website
+- KI-Chatbot
+- SEO Grundoptimierung
+- Voice Agent
 
 ### Einzelne Services (monatlich kündbar)
 **KI-Chatbot – 150 €/Monat**
