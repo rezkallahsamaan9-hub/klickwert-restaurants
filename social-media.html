@@ -47,7 +47,7 @@
     .ws-back { position: fixed; top: 90px; left: 24px; z-index: 100; color: var(--gold); text-decoration: none; font-size: 0.9rem; font-weight: 600; transition: opacity 0.3s; }
     .ws-back:hover { opacity: 0.7; }
 
-    .ws-problem { padding: 100px 0; background: var(--surface); }
+    .ws-problem { padding: 100px 0; background: var(--surface); overflow: hidden; }
     .ws-problem h2 { font-family: var(--font-display); font-size: clamp(1.8rem, 4vw, 2.8rem); color: var(--text); text-align: center; margin-bottom: 3.5rem; }
     .ws-problem-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; max-width: 1000px; margin: 0 auto; }
     .ws-problem-card { background: var(--bg); border: 1px solid #222; border-radius: 12px; padding: 32px; transition: transform 0.4s ease, box-shadow 0.4s ease; opacity: 0; }
@@ -70,7 +70,7 @@
     .sol-card h3 { font-family: var(--font-display); font-size: 1.3rem; color: var(--gold); margin-bottom: 0.5rem; }
     .sol-card p { color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6; }
 
-    .ws-timeline { padding: 100px 0; background: var(--surface); }
+    .ws-timeline { padding: 100px 0; background: var(--surface); overflow: hidden; }
     .ws-timeline h2 { font-family: var(--font-display); font-size: clamp(1.8rem, 4vw, 2.8rem); color: var(--text); text-align: center; margin-bottom: 4rem; }
     .timeline-wrap { position: relative; max-width: 600px; margin: 0 auto; padding-left: 60px; }
     .timeline-line { position: absolute; left: 20px; top: 0; width: 2px; height: 100%; background: #222; }
