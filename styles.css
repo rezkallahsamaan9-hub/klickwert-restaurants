@@ -779,13 +779,16 @@ a.service-link:hover .service-more {
 }
 
 .pakete-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: 2rem;
   align-items: center;
 }
 
 .paket-card {
+  flex: 0 1 340px;
+  max-width: 400px;
   background: var(--surface);
   border: 1px solid #222;
   border-radius: 16px;
@@ -1087,9 +1090,12 @@ a.service-link:hover .service-more {
   .garantie-box { padding: 40px 24px; }
 
   .pakete-grid {
-    grid-template-columns: 1fr;
     max-width: 420px;
     margin: 0 auto;
+  }
+
+  .paket-card {
+    flex: 1 1 100%;
   }
 
   .paket-featured { transform: scale(1); }
